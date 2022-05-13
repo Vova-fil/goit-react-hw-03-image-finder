@@ -7,11 +7,8 @@ import { LoaderStyle, Title } from './Loader.styled';
 export default function Loader() {
   return (
     <LoaderStyle>
-      <Title>Загрузка...</Title>
-
+      <Title> Загрузка...</Title>
       <Spinner animation="border" variant="warning" />
-      <Spinner animation="border" variant="info" />
-      <Spinner animation="border" variant="light" />
     </LoaderStyle>
   );
 }

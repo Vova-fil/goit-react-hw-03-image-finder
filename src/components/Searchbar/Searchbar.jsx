@@ -42,7 +42,7 @@ export default class SearchBar extends Component {
       <Searchbar>
         <SearchForm onSubmit={this.handleSubmit}>
           <SearchFormBtn type="submit">
-            <FcSearch size="20" />
+            <FcSearch size="40" />
           </SearchFormBtn>
 
           <SearchFormInput
