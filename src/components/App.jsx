@@ -108,7 +108,7 @@ export class App extends Component {
     const { images, status, error } = this.state;
     return (
       <div>
-        <SearchBar inSubmit={this.handleFormSubmit} />
+        <SearchBar onSubmit={this.handleFormSubmit} />
         <ToastContainer autoClose={4000} />
         {images.length !== 0 && <PixabayImageGallery images={images} />}
         {status === 'pending' && (

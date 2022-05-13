@@ -26,7 +26,7 @@ export default class SearchBar extends Component {
       toast.warn('Введите корректный запрос!', { theme: 'colored' });
       return;
     }
-    this.props.inSubmit(this.state.searchImage);
+    this.props.onSubmit(this.state.searchImage);
   };
 
   handleChange = e => {
