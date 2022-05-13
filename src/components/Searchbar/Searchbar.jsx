@@ -2,7 +2,7 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FcSearch } from 'react-icons/fc';
 import { toast } from 'react-toastify';
-
+import './Searchbar.styled.js';
 import {
   Searchbar,
   SearchForm,
@@ -26,7 +26,7 @@ export default class SearchBar extends Component {
       toast.warn('Введите корректный запрос!', { theme: 'colored' });
       return;
     }
-    this.props.onSubmit(this.state.searchImage);
+    this.props.inSubmit(this.state.searchImage);
   };
 
   handleChange = e => {
