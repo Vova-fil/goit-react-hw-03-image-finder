@@ -24,15 +24,10 @@ export class App extends Component {
     const nextPage = this.state.page;
 
     if (prevSearch !== nextSearch) {
-      // console.log('змінився запрос');
       this.loadImagesBySearch(nextSearch);
-      // this.setState({ searchImage: '' });
-      // this.resetImages();
-      // this.resetPage();
     }
 
     if (prevPage < nextPage) {
-      // console.log('змінився номер сторінки');
       this.loadMoreImages(nextPage);
     }
     this.scrollToBottom();
@@ -44,40 +39,33 @@ export class App extends Component {
     pixabayAPI
       .fetchPixabayImage(searchImage, page)
       .then(imagesObj => {
-        // console.log(images);
         if (imagesObj.hits.length === 0) {
           toast.error(
             'Sorry, there are no images matching your search query. Please try again.'
           );
           this.setState({ status: 'idle' });
-        } else this.setState({ images: imagesObj.hits, status: 'resolved' });
+        } else {
+          toast.info(`'количество страниц ${imagesObj.hits.length}'`);
+          this.setState({
+            images: imagesObj.hits,
+            status: 'resolved',
+          });
+        }
       })
       .catch(error => this.setState({ error, status: 'rejected' }));
   }
   loadMoreImages(page) {
     this.setState({ status: 'pending' });
     const { images, searchImage } = this.state;
-    pixabayAPI
-      .fetchPixabayImage(searchImage, page)
-      // якщо все добре, то ми міняємо статус на резолвд
-      .then(imagesObj => {
-        // console.log(response);
-        if (imagesObj.hits.length === 0) {
-          toast.error(
-            'Sorry, there are no more images matching your search query.'
-          );
-          this.setState({ status: 'idle' });
-        } else
-          this.setState({
-            images: [...images, ...imagesObj.hits],
-            status: 'resolved',
-          });
-      })
-      .catch(error => this.setState({ error, status: 'rejected' }));
+    pixabayAPI.fetchPixabayImage(searchImage, page).then(imagesObj => {
+      this.setState({
+        images: [...images, ...imagesObj.hits],
+        status: 'resolved',
+      });
+    });
   }
 
   handleFormSubmit = searchImage => {
-    console.log(searchImage);
     this.resetPage();
     this.setState({ searchImage: searchImage });
   };
@@ -87,7 +75,6 @@ export class App extends Component {
   }
 
   resetPage() {
-    // console.log(this.state.page);
     this.setState({ page: 1 });
   }
 
@@ -130,21 +117,3 @@ export class App extends Component {
     );
   }
 }
-
-// export const App = () => {
-//   return (
-//     <div
-//       style={{
-//         height: '100vh',
-//         display: 'flex',
-//         justifyContent: 'center',
-//         alignItems: 'center',
-//         fontSize: 40,
-//         textTransform: 'uppercase',
-//         color: '#010101',
-//       }}
-//     >
-//       React homework template
-//     </div>
-//   );
-// };

@@ -25,9 +25,9 @@ export const Button = styled.div`
   }
 `;
 
-// export const ButtonContainer = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   padding-top: 10px;
-//   padding-bottom: 10px;
-// `;
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+`;
