@@ -108,7 +108,7 @@ export class App extends Component {
             <p>{error.message}</p>
           </div>
         )}
-        {status === 'resolved' && (
+        {status === 'resolved' && this.state.page < images.length && (
           <div>
             <ButtonLoadMore onClick={() => this.onButtonClick()} />
           </div>
