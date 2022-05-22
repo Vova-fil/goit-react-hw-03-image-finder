@@ -17,5 +17,7 @@ export default function PixabayImageGallery({ images }) {
   );
 }
 PixabayImageGallery.propTypes = {
+  // images: PropTypes.object.isRequired
   images: PropTypes.array.isRequired,
+  id: PropTypes.number.isRequired,
 };

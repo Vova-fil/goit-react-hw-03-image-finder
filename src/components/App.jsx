@@ -15,6 +15,7 @@ export class App extends Component {
     status: 'idle',
     images: [],
     page: 1,
+    totalHits: '',
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -45,11 +46,13 @@ export class App extends Component {
           );
           this.setState({ status: 'idle' });
         } else {
-          toast.info(`'количество страниц ${imagesObj.hits.length}'`);
+          toast.info(`количество картинок ${imagesObj.totalHits}`);
           this.setState({
             images: imagesObj.hits,
             status: 'resolved',
+            totalHits: imagesObj.totalHits,
           });
+          console.log(imagesObj.totalHits);
         }
       })
       .catch(error => this.setState({ error, status: 'rejected' }));
@@ -92,7 +95,9 @@ export class App extends Component {
   }
 
   render() {
-    const { images, status, error } = this.state;
+    const { images, status, error, page, totalHits } = this.state;
+    const loadMore = page < totalHits / 12;
+
     return (
       <div>
         <SearchBar onSubmit={this.handleFormSubmit} />
@@ -108,7 +113,7 @@ export class App extends Component {
             <p>{error.message}</p>
           </div>
         )}
-        {status === 'resolved' && this.state.page < images.length && (
+        {status === 'resolved' && loadMore && (
           <div>
             <ButtonLoadMore onClick={() => this.onButtonClick()} />
           </div>
